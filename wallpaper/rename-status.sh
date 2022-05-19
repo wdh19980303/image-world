@@ -1,4 +1,6 @@
 #!/bin/bash
+OLD_IFS=${IFS}
+IFS=$'\n'
 IMAGE_PREFIX="wallpaper"
 # for image_name in wallhaven*; do
 #     image_type=${image_name##*.}
@@ -41,8 +43,9 @@ function image_not_exist_max() {
 
 index[0]=1
 index[1]=1
-dir_index
+dir_index=0
 for image_name in *; do
+    echo "${image_name}"
     image_type=${image_name##*.}
     if [ "${image_type}" = "png" ] || [ "${image_type}" = "jpg" ] || [ "${image_type}" = "jpeg" ]; then
         direction=$(get_image_direction "${image_name}")
@@ -62,3 +65,4 @@ for image_name in *; do
         fi
     fi
 done
+IFS=${OLD_IFS}
