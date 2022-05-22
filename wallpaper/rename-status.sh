@@ -22,7 +22,10 @@ function get_image_resolution() {
 }
 
 function get_image_direction() {
+    old=${IFS}
+    IFS=" "
     IFS=" " read -r -a image_size <<<"$(get_image_resolution "${1}")"
+    IFS=${old}
     if ((image_size[0] > image_size[1])); then
         echo "h"
     else
